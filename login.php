@@ -1,6 +1,7 @@
 <?php
 session_start();
 require 'includes/db.php';
+include 'includes/header.php';
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $email = $_POST['email'];
@@ -15,22 +16,33 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $_SESSION['user_id'] = $usuario['id'];
         header('Location: index.php');
     } else {
-        echo "Email ou senha inválidos.";
+        echo "<div class='alert alert-danger'>Email ou senha inválidos.</div>";
     }
 }
 ?>
 
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Login</title>
-</head>
-<body>
-    <h1>Login</h1>
-    <form method="POST">
-        Email: <input type="email" name="email" required><br>
-        Senha: <input type="password" name="senha" required><br>
-        <button type="submit">Login</button>
-    </form>
-</body>
-</html>
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <div class="card mt-5">
+            <div class="card-header">
+                <h1 class="card-title">Login</h1>
+            </div>
+            <div class="card-body">
+                <form method="POST">
+                    <div class="form-group">
+                        <label>Email</label>
+                        <input type="email" name="email" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Senha</label>
+                        <input type="password" name="senha" class="form-control" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block">Login</button>
+                </form>
+            </div>
+        </div>
+        <a href="register.php" class="btn btn-link mt-3">Registrar</a>
+    </div>
+</div>
+
+<?php include 'includes/footer.php'; ?>
